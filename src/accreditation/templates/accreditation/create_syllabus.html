@@ -1,0 +1,69 @@
+{% extends 'dashboard/base.html' %} {% block content %} {% include 'dashboard/snippets/menu_user.html' %} {% include 'dashboard/snippets/menu.html' %}
+
+<!--   ['goals', 'description', 'length', 'evaluation', 'grad', 'validation'] -->
+
+
+<div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+        <form class='create-form' method="post">{% csrf_token %}
+            <div class="modal-body">
+                <div class="modal-header">
+                    <h5 class="modal-title">New syllabus</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
+                    </button>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="mb-3">
+                            <label class="form-label" for="id_title">Title</label>
+                            <input type="text" class="form-control" name="title" id="id_title" placeholder="Your syllabus title">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="mb-3">
+                            <label class="form-label" for="id_name">Name</label>
+                            <input type="text" class="form-control" name="name" id="id_name" placeholder="Your syllabus name">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="id_goals">goals</label>
+                    <textarea type="text" class="form-control" name="goals" id="id_goals" placeholder="Your syllabus goals"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="id_description">description</label>
+                    <textarea type="text" class="form-control" name="description" id="id_description" placeholder="Your syllabus description"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="id_evaluation">evaluation</label>
+                    <textarea type="text" class="form-control" name="evaluation" id="id_evaluation" placeholder="Your syllabus evaluation"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="id_grad">grad</label>
+                    <textarea type="text" class="form-control" name="grad" id="id_grad" placeholder="Your syllabus grad"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="id_validation">validation</label>
+                    <textarea type="text" class="form-control" name="validation" id="id_validation" placeholder="Your syllabus validation"></textarea>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <a href="{% url 'dashboard:home' %}" class="btn btn-link link-secondary" data-dismiss="modal">
+                    Cancel
+                </a>
+                <button type="submit" class="submit-button btn btn-primary ml-auto">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>                    Create a new syllabus
+                </button>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+{% endblock content %}

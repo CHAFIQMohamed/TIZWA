@@ -1,0 +1,160 @@
+{% extends 'dashboard/base.html' %} {% block content %} {% include 'dashboard/snippets/menu_user.html' %} {% include 'dashboard/snippets/menu.html' %}
+<div class="content">
+    <div class="container-xl">
+        <form class='create-form' method="post">{% csrf_token %}
+            <div class="row row-deck row-cards">
+
+                <div class="col-lg-8">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+                                <h5 class="modal-title">New accreditation</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
+                                 </button>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="id_title">Title</label>
+                                            <input type="text" class="form-control" name="title" id="id_title" placeholder="Your accreditation title">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="id_name">Name</label>
+                                            <input type="text" class="form-control" name="name" id="id_name" placeholder="Your accreditation name">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="institute">Institute</label>
+                                            <select class="form-select" id="institute" name="institute">
+                                        <option value="ISTI" selected>ISTI</option>
+                                        <option value="ABS">ABS</option>
+                                    </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <label class="form-label">Accreditation type</label>
+                                <div class="form-selectgroup-boxes row mb-3">
+                                    <div class="col-lg-6">
+                                        <label class="form-selectgroup-item">
+                                    <input type="radio" name="kind" value="Bachelor" class="form-selectgroup-input" checked>
+                                    <span class="form-selectgroup-label d-flex align-items-center p-3">
+                                        <span class="mr-3">
+                                            <span class="form-selectgroup-check"></span>
+                                        </span>
+                                        <span class="form-selectgroup-label-content">
+                                            <span class="form-selectgroup-title strong mb-1">Bachelor</span>
+                                            <span class="d-block text-muted">Diplôme 4 ans après BAC</span>
+                                        </span>
+                                    </span>
+                                </label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label class="form-selectgroup-item">
+                                    <input type="radio" name="kind" value="Master" class="form-selectgroup-input">
+                                    <span class="form-selectgroup-label d-flex align-items-center p-3">
+                                        <span class="mr-3">
+                                            <span class="form-selectgroup-check"></span>
+                                        </span>
+                                        <span class="form-selectgroup-label-content">
+                                            <span class="form-selectgroup-title strong mb-1">Master</span>
+                                            <span class="d-block text-muted">Diplôme 2 ans après BAC+3</span>
+                                        </span>
+                                    </span>
+                                </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="id_goals">goals</label>
+                                <textarea type="text" class="form-control" name="goals" id="id_goals" placeholder="Your goals"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="id_description">description</label>
+                                <textarea type="text" class="form-control" name="description" id="id_description" placeholder="Your description"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="id_acquired_skilles">Acquired Skills</label>
+                                <textarea type="text" class="form-control" name="acquired_skilles" id="id_acquired_skilles" placeholder="Your acquired skills"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="id_careers">Careers</label>
+                                <textarea type="text" class="form-control" name="careers" id="id_careers" placeholder="Your careers"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="id_areas">Areas</label>
+                                <textarea type="text" class="form-control" name="areas" id="id_areas" placeholder="Your areas"></textarea>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="{% url 'dashboard:home' %}" class="btn btn-link link-secondary" data-dismiss="modal">
+                                    Cancel
+                                </a>
+                                <button type="submit" class="submit-button btn btn-primary ml-auto">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>                    Create a new accreditation
+                                </button>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="page-header">
+                                <div class="row align-items-center">
+                                    <!-- Page title actions -->
+                                    <div class="col-auto ml-auto d-print-none">
+                                        <span class="d-none d-sm-inline">
+                                    <a href="#" class="btn btn-white">
+                                        New Syllabus
+                                    </a>
+                                 </span>
+                                        <a href="{% url 'accreditation:create_syllabus' %}" class="btn btn-primary ml-3 d-none d-sm-inline-block" data-toggle="modal" data-target="#modal-report">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>                                            Add Syllabus
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-content">
+                                <h4>Available Syllabus</h4>
+                                <div class="table-responsive">
+                                    <table class="table card-table table-vcenter">
+                                        {% for module in modules %}
+                                        <tr>
+                                            <td class="w-1 pr-0">
+                                                <label class="form-check m-0" for="id_syllabus_{{module.name}}">
+                                                    <input type="checkbox" class="form-check-input" name="syllabus_'{{module.name}}'" id="id_syllabus_'{{module.name}}'">
+                                                    <span class="form-check-label"></span>
+                                                </label>
+                                            </td>
+                                            <td class="w-100">
+                                                <a href="#" class="text-reset">{{module.name}}. {{module.title}}</a>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+{% endblock content %}

@@ -1,0 +1,40 @@
+{% extends 'dashboard/base.html' %} {% block content %} {% include 'dashboard/snippets/menu_user.html' %} {% include 'dashboard/snippets/menu.html' %}
+<div class="content">
+    <div class="container-xl">
+      <!-- Page title -->
+      <div class="page-header">
+        <div class="row align-items-center">
+          <div class="col-auto">
+            <h2 class="page-title">
+                {{syllabus.name}}. {{syllabus.title}}
+            </h2>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="d-none d-lg-block col-lg-3 order-lg-1 mb-4">
+          <div class="sticky-top">
+
+            <h5 class="subheader">On this page</h5>
+            {% autoescape off %}
+            {{ md_toc_as_html }}
+            {% endautoescape %}
+          </div>
+        </div>
+        <div class="col-lg-9">
+          <div class="card card-lg">
+            <div class="card-body">
+              <div class="markdown">
+                {% autoescape off %}
+                {{ md_data_as_html }}
+                {% endautoescape %}                  
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+  </div>
+</div>
+{% endblock content %}

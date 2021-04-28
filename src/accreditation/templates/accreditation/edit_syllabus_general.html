@@ -1,0 +1,56 @@
+{% extends 'dashboard/base.html' %} {% block content %} {% include 'dashboard/snippets/menu_user.html' %} {% include 'dashboard/snippets/menu.html' %}
+
+<div class="content">
+    <div class="container">
+        <div class="row  align-items-center">
+            <div class="col-6">
+                <form class='card' method="post">{% csrf_token %}
+
+                    <div class="card-header">
+                        <h4 class="card-title">Syllabus general informations</h4>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="mb-3">
+                                <label class="form-label" for="id_title">Titre du Module</label>
+                                <input type="text" class="form-control" name="title" id="id_title" placeholder="Your Syllabus title">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label" for="coordinator">Coordinateur</label>
+                                <select class="form-select" id="coordinator" name="coordinator">
+                                        {% for account in accounts %}
+                                            <option value={{account.email}}>{{account.first_name}} {{account.last_name}}</option>
+                                        {% endfor %}
+                                    </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label" for="id_subelement1">Sous élément 1</label>
+                                <input type="text" class="form-control" name="subelement1" id="id_subelement1" placeholder="Your sub-element 1 title">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label" for="id_subelement2">Sous élément 2</label>
+                                <input type="text" class="form-control" name="subelement2" id="id_subelement2" placeholder="Your sub-element 2 title">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <a href="{% url 'accreditation:edit_syllabus' accreditation.name syllabus.name %}" class="btn btn-link link-secondary" data-dismiss="modal"> Cancel </a>
+                        <button type="submit" class="submit-button btn btn-primary ml-auto">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>  Update
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock content %}

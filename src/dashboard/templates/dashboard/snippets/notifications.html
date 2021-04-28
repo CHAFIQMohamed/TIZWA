@@ -1,0 +1,32 @@
+{% load static %} {% load notifications_tags %}
+<div class="card">
+    <div class="card-header">
+        <h4 class="card-title">Notifications</h4>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table card-table table-vcenter">
+            <tr>
+                <th>Object</th>
+                <th>Message</th>
+                <th>Author</th>
+            </tr>
+            {% for notification in notifications %}
+            <tr>
+                <td>
+                    <!-- TODO this is not the best way to do -->
+                    <!-- <a href={{notification.target.url}} class="btn btn-sm btn-outline-secondary"> -->
+                    <a href="#" class="btn btn-sm btn-outline-secondary">
+                        {{notification.target.name}}
+                      </a>
+                </td>
+                <td> {{notification.verb}} </td>
+                <td class="w-10">
+                    <a href="#" class="text-reset">{{notification.actor.first_name}} {{notification.actor.last_name}}</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</div>

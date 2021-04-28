@@ -1,0 +1,216 @@
+{% extends 'dashboard/base.html' %} {% block content %} {% include 'dashboard/snippets/menu_user.html' %} {% include 'dashboard/snippets/menu.html' %}
+<div class="content">
+    <div class="container-xl">
+        <!-- Page title -->
+        <div class="page-header">
+            <div class="row align-items-center">
+                <div class="col-auto">
+                    <h2 class="page-title">
+                        Edit syllabus: {{syllabus.name}}. {{syllabus.title}}
+                    </h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="d-none d-lg-block col-lg-3 order-lg-1 mb-4">
+              <div class="sticky-top">
+                <div class="btn-list">                        
+                    <a href="{% url 'accreditation:edit_accreditation' syllabus.accreditation.name %}" class="btn btn-dark" data-toggle="modal" data-target="#modal-simple">
+                        Back to {{syllabus.accreditation.name}}
+                    </a>
+                    <a href="{% url 'accreditation:detail_syllabus' accreditation.name  syllabus.name %}" class="btn btn-outline-secondary" data-toggle="modal" data-target="#modal-simple">
+                        Detail
+                    </a>
+                    {% if syllabus.status == 'ongoing' %}
+                    <a href="{% url 'accreditation:request_approval_syllabus' accreditation.name  syllabus.name %}" class="btn btn-outline-secondary" data-toggle="modal" data-target="#modal-simple">
+                        Ask Approval
+                    </a>
+                    {% endif %}
+                    {% if syllabus.status == 'pending' %}
+                    <a href="{% url 'accreditation:approve_syllabus' accreditation.name  syllabus.name %}" class="btn btn-outline-secondary" data-toggle="modal" data-target="#modal-simple">
+                        Approve
+                    </a>        
+                    {% endif %}            
+                </div>
+                <br>
+                <h5 class="subheader">On this page</h5>
+                <ul class="list-unstyled">
+                    <li class="toc-entry toc-h2"><a href="{% url 'accreditation:edit_syllabus_general' accreditation.name syllabus.name %}">Informations générales</a></li>
+
+                    <li class="toc-entry toc-h2"><a href="#">Syllabus</a>
+                        <ul class="list-unstyled">
+                            <li class="toc-entry toc-h2"><a href="{% url 'accreditation:edit_syllabus_goals' accreditation.name syllabus.name %}">Objectifs</a></li>
+                            <li class="toc-entry toc-h2"><a href="#">Pré-requis pédagogiques</a></li>
+                            <li class="toc-entry toc-h2"><a href="#">volume horaire</a></li>
+                            <li class="toc-entry toc-h2"><a href="{% url 'accreditation:edit_syllabus_description' accreditation.name syllabus.name %}">Description du contenu </a></li>
+                            <li class="toc-entry toc-h2"><a href="#">modalités d’organisation des activités pratiques</a></li>
+                            <li class="toc-entry toc-h2"><a href="#">Description du travail personnel, le cas échéant</a></li>
+                        </ul>
+                    </li> 
+
+                    <li class="toc-entry toc-h2"><a href="#">Evaluation</a>
+                        <ul class="list-unstyled">   
+                            <li class="toc-entry toc-h2"><a href="{% url 'accreditation:edit_syllabus_evaluation' accreditation.name syllabus.name %}">Modes D’évaluation</a></li>
+                            <li class="toc-entry toc-h2"><a href="{% url 'accreditation:edit_syllabus_grad' accreditation.name syllabus.name %}">Note Du Module</a></li>
+                            <li class="toc-entry toc-h2"><a href="{% url 'accreditation:edit_syllabus_validation' accreditation.name syllabus.name %}">Modalités De Validation Du Module</a></li>
+                        </ul>
+                    </li> 
+
+                    <li class="toc-entry toc-h2"><a href="{% url 'accreditation:edit_syllabus_intervention' accreditation.name syllabus.name %}">Interventions</a></li>
+                    <li class="toc-entry toc-h2"><a href="#">Coordonnateur et équipe pédagogique du module</a></li>
+                    <li class="toc-entry toc-h2"><a href="#">Autres Eléments pertinents</a></li> 
+
+                </ul>
+
+              </div>
+            </div>
+      
+            <div class="col-lg-9">
+                <div class="card card-lg">
+                  <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-lg-6 col-xl-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title">Répartition par type d'intervention</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div id="chart-total-kind"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-xl-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title">Répartition par Professeur</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div id="chart-total-professor"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 col-lg-8">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Interventions</h4>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table card-table table-vcenter">
+                                        <thead>
+                                            <tr>
+                                                <th>Composante</th>
+                                                <th>Professeur</th>
+                                                <th>Type de l'intervention</th>
+                                                <th>Durée (h)</th>
+                                            </tr>
+                                        </thead>
+                                        {% for intervention in interventions %}
+                                        <tr>
+                                            <td>{{intervention.component}}</td>
+                                            <td>{{intervention.professor.last_name}} {{intervention.professor.first_name}}</td>
+                                            <td>{{intervention.kind}}</td>
+                                            <td>{{intervention.duration}}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>    
+        </div>
+    </div>
+</div>
+
+
+<!-- Libs JS -->
+<script src="/static/libs/apexcharts/dist/apexcharts.min.js"></script>
+<!-- Tabler Core -->
+<script src="/static/js/tabler.min.js"></script>
+<script>
+    // @formatter:off
+    document.addEventListener("DOMContentLoaded", function() {
+        var my_values = JSON.parse("{{chart_kind_values|escapejs}}");
+        var my_labels = JSON.parse("{{chart_kind_labels|escapejs}}");
+        var my_colors = JSON.parse("{{chart_kind_colors|escapejs}}");
+
+        window.ApexCharts && (new ApexCharts(document.getElementById('chart-total-kind'), {
+            chart: {
+                type: "donut",
+                fontFamily: 'inherit',
+                height: 240,
+                sparkline: {
+                    enabled: true
+                },
+                animations: {
+                    enabled: false
+                },
+            },
+            fill: {
+                opacity: 1,
+            },
+            series: my_values,
+            labels: my_labels,
+            grid: {
+                strokeDashArray: 4,
+            },
+            colors: my_colors,
+            legend: {
+                show: false,
+            },
+            tooltip: {
+                fillSeriesColor: false
+            },
+        })).render();
+    });
+    // @formatter:on
+</script>
+
+<script>
+    // @formatter:off
+    document.addEventListener("DOMContentLoaded", function() {
+        var my_values = JSON.parse("{{chart_professor_values|escapejs}}");
+        var my_labels = JSON.parse("{{chart_professor_labels|escapejs}}");
+        var my_colors = JSON.parse("{{chart_professor_colors|escapejs}}");
+
+        window.ApexCharts && (new ApexCharts(document.getElementById('chart-total-professor'), {
+            chart: {
+                type: "donut",
+                fontFamily: 'inherit',
+                height: 240,
+                sparkline: {
+                    enabled: true
+                },
+                animations: {
+                    enabled: false
+                },
+            },
+            fill: {
+                opacity: 1,
+            },
+            series: my_values,
+            labels: my_labels,
+            grid: {
+                strokeDashArray: 4,
+            },
+            colors: my_colors,
+            legend: {
+                show: false,
+            },
+            tooltip: {
+                fillSeriesColor: false
+            },
+        })).render();
+    });
+    // @formatter:on
+</script>
+
+{% endblock content %}

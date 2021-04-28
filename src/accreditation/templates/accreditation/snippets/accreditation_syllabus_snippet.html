@@ -1,0 +1,44 @@
+<div class="col-sm-6 col-xl-12">
+    <div class="card d-flex flex-column">
+        <div class="card-header">
+            <h4 class="card-title">{{title}}</h4>
+        </div>
+        <div class="card-body d-flex flex-column">
+            <div class="table-responsive">
+                <table class="table card-table table-vcenter">
+                    <tr>
+                        <th>Module</th>
+                        <th>Titre</th>
+                        <th>Coordinateur</th>
+                        <th>Status</th>
+                    </tr>                    
+                    {% for syllabus in semester %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'accreditation:edit_syllabus' accreditation.name syllabus.name %}" class="btn btn-sm btn-outline-secondary">
+                                {{syllabus.name}}
+                            </a>
+                        </td>
+                        <td class="w-100">
+                            <a href="#" class="text-reset">{{syllabus.title}}</a>
+                        </td>
+                        <td class="w-100">
+                            <a href="#" class="text-reset">{{syllabus.coordinator.first_name|make_list|first}}. {{syllabus.coordinator.last_name}}</a>
+                        </td>  
+                        <!-- status -->
+                        {% if syllabus.status == 'approved' %}
+                        <td class="w-100" style="background-color:#88D8B0"></td>
+                        {% endif %} 
+                        {% if syllabus.status == 'pending' %}
+                        <td class="w-100" style="background-color:#ffffa8"></td>
+                        {% endif %} 
+                        {% if syllabus.status == 'ongoing' %}
+                        <td class="w-100" style="background-color:#FF8380"></td>
+                        {% endif %}       
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

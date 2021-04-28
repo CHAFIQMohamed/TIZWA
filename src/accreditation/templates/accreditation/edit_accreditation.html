@@ -1,0 +1,102 @@
+{% extends 'dashboard/base.html' %} {% block content %} {% include 'dashboard/snippets/menu_user.html' %} {% include 'dashboard/snippets/menu.html' %}
+<div class="content">
+    <div class="container-xl">
+        <!-- Page title -->
+        <div class="page-header">
+            <div class="row align-items-center">
+                <div class="col-auto">
+                    <h2 class="page-title">
+                        Edit accreditation: {{accreditation.name}}- {{accreditation.title}}
+                    </h2>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="d-none d-lg-block col-lg-3 order-lg-1 mb-4">
+              <div class="sticky-top">
+                <div class="btn-list">
+                    <a href="{% url 'accreditation:detail_accreditation' accreditation.name %}" class="btn btn-outline-secondary" data-toggle="modal" data-target="#modal-simple">
+                        Detail
+                    </a>                                      
+                </div>
+                <br>
+
+                <h5 class="subheader">On this page</h5>
+                <ul class="list-unstyled">
+                    <li class="toc-entry toc-h2"><a href="{% url 'accreditation:edit_accreditation_general' accreditation.name %}">Informations générales</a></li>
+                    <li class="toc-entry toc-h2"><a href="{% url 'accreditation:edit_accreditation_goals' accreditation.name %}">Objectifs</a></li>
+                    <li class="toc-entry toc-h2"><a href="{% url 'accreditation:edit_accreditation_acquired_skills' accreditation.name %}">Compétences à acquérir </a></li>
+                    <li class="toc-entry toc-h2"><a href="{% url 'accreditation:edit_accreditation_careers' accreditation.name %}">Débouchés de la formation</a></li>
+                    <li class="toc-entry toc-h2"><a href="#">Conditions d’accès et pré-requis</a>
+                        <ul class="list-unstyled">
+                            <li class="toc-entry toc-h2"><a href="{% url 'accreditation:edit_accreditation_access_diploma' accreditation.name %}">Diplômes requis</a></li>
+                            <li class="toc-entry toc-h2"><a href="{% url 'accreditation:edit_accreditation_access_prerequisite' accreditation.name %}">Pré requis pédagogiques spécifiques</a></li>
+                            <li class="toc-entry toc-h2"><a href="{% url 'accreditation:edit_accreditation_access_selection' accreditation.name %}">Procédures de sélection</a></li>
+                            <li class="toc-entry toc-h2"><a href="{% url 'accreditation:edit_accreditation_access_file' accreditation.name %}">Etude du dossier</a></li>
+                            <li class="toc-entry toc-h2"><a href="{% url 'accreditation:edit_accreditation_access_exam' accreditation.name %}">Test écrit</a></li>
+                            <li class="toc-entry toc-h2"><a href="{% url 'accreditation:edit_accreditation_access_interview' accreditation.name %}">Entretien</a></li>
+                        </ul>
+                    </li> 
+                    <li class="toc-entry toc-h2"><a href="#">articulation de la filière avec les formations autorisées/accréditées dispensées au niveau de l’établissement</a></li>
+                    <li class="toc-entry toc-h2"><a href="{% url 'accreditation:edit_accreditation_syllabus' accreditation.name %}">Modules</a></li>
+                </ul>
+                
+
+              </div>
+            </div>
+            <div class="col-lg-9">
+              <div class="card card-lg">
+                <div class="card-body">
+                    
+                    <div class="row row-deck row-cards">
+                        {% include 'accreditation/snippets/accreditation_syllabus_snippet.html' with title='Semester 1' semester=semester1 %}            
+                    </div>
+
+                    <div class="row row-deck row-cards">            
+                        {% include 'accreditation/snippets/accreditation_syllabus_snippet.html' with title='Semester 2' semester=semester2 %}
+                    </div>
+            
+                    {% if semester3 %}
+                    <div class="row row-deck row-cards">
+                        {% include 'accreditation/snippets/accreditation_syllabus_snippet.html' with title='Semester 3' semester=semester3 %}
+                    </div>        
+                    {% endif %}
+            
+                    {% if semester4 %}
+                    <div class="row row-deck row-cards">
+                        {% include 'accreditation/snippets/accreditation_syllabus_snippet.html' with title='Semester 4' semester=semester4 %}
+                    </div>        
+                    {% endif %}
+            
+                    {% if semester5 %}
+                    <div class="row row-deck row-cards">
+                        {% include 'accreditation/snippets/accreditation_syllabus_snippet.html' with title='Semester 5' semester=semester5 %}
+                    </div>        
+                    {% endif %}
+            
+                    {% if semester6 %}
+                    <div class="row row-deck row-cards">
+                        {% include 'accreditation/snippets/accreditation_syllabus_snippet.html' with title='Semester 6' semester=semester6 %}
+                    </div>        
+                    {% endif %}
+            
+                    {% if semester7 %}
+                    <div class="row row-deck row-cards">
+                        {% include 'accreditation/snippets/accreditation_syllabus_snippet.html' with title='Semester 7' semester=semester7 %}
+                    </div>        
+                    {% endif %}
+            
+                    {% if semester8 %}
+                    <div class="row row-deck row-cards">
+                        {% include 'accreditation/snippets/accreditation_syllabus_snippet.html' with title='Semester 8' semester=semester8 %}
+                    </div>        
+                    {% endif %}
+
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

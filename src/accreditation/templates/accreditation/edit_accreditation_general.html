@@ -1,0 +1,46 @@
+{% extends 'dashboard/base.html' %} {% block content %} {% include 'dashboard/snippets/menu_user.html' %} {% include 'dashboard/snippets/menu.html' %}
+
+<div class="content">
+    <div class="container">
+        <div class="row  align-items-center">
+            <div class="col-6">
+                <form class='card' method="post">{% csrf_token %}
+
+                    <div class="card-header">
+                        <h4 class="card-title">Accreditation general informations</h4>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+ 
+                            <div class="mb-3">
+                                <label class="form-label" for="id_options">Options(s)</label>
+                                <input type="text" class="form-control" name="options" id="id_options">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="id_domains">Disciplines</label>
+                                <input type="text" class="form-control" name="domains" id="id_domains">
+                            </div>                            
+                            <div class="mb-3">
+                                <label class="form-label" for="id_keywords">Mots clés</label>
+                                <input type="text" class="form-control" name="keywords" id="id_keywords">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <a href="{% url 'accreditation:edit_accreditation' accreditation.name %}" class="btn btn-link link-secondary" data-dismiss="modal"> Cancel </a>
+                        <button type="submit" class="submit-button btn btn-primary ml-auto">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>  Update
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock content %}

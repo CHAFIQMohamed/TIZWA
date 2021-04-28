@@ -1,0 +1,42 @@
+{% extends 'dashboard/base.html' %} {% block content %} {% include 'dashboard/snippets/menu_user.html' %} {% include 'dashboard/snippets/menu.html' %}
+
+<div class="content">
+    <div class="container">
+        <h3>Syllabuses</h3>
+        <div class="row row-deck row-cards">
+            {% include 'accreditation/snippets/accreditation_syllabus_snippet.html' with title='Semester 1' semester=semester1 %}
+            {% include 'accreditation/snippets/accreditation_syllabus_snippet.html' with title='Semester 2' semester=semester2 %}
+        </div>
+
+        {% if semester3 %}
+        <div class="row row-deck row-cards">
+            {% include 'accreditation/snippets/accreditation_syllabus_snippet.html' with title='Semester 3' semester=semester3 %}
+            {% if semester4 %}
+                {% include 'accreditation/snippets/accreditation_syllabus_snippet.html' with title='Semester 4' semester=semester4 %}            
+            {% endif %}
+        </div>        
+        {% endif %}
+        
+        {% if semester5 %}
+        <div class="row row-deck row-cards">
+            {% include 'accreditation/snippets/accreditation_syllabus_snippet.html' with title='Semester 5' semester=semester5 %}
+            {% if semester6 %}
+                {% include 'accreditation/snippets/accreditation_syllabus_snippet.html' with title='Semester 6' semester=semester6 %}            
+            {% endif %}
+        </div>        
+        {% endif %}
+        
+        {% if semester7 %}
+        <div class="row row-deck row-cards">
+            {% include 'accreditation/snippets/accreditation_syllabus_snippet.html' with title='Semester 7' semester=semester7 %}
+            {% if semester8 %}
+                {% include 'accreditation/snippets/accreditation_syllabus_snippet.html' with title='Semester 8' semester=semester8 %}            
+            {% endif %}
+        </div>        
+        {% endif %}
+
+    </div>
+</div>
+
+
+{% endblock content %}

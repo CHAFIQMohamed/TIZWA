@@ -1,0 +1,170 @@
+{% extends 'dashboard/base.html' %} {% block content %} {% include 'dashboard/snippets/menu_user.html' %} {% include 'dashboard/snippets/menu.html' %}
+<div class="content">
+    <div class="container-xl">
+        <!-- Page title -->
+        <div class="page-header">
+            <div class="row align-items-center">
+                <div class="col-auto">
+                    <h2 class="page-title">
+                        Profile
+                    </h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h2 class="mb-3">{{user.first_name}} {{user.last_name}}</h2>
+                        <div class="mt-1 small text-muted">{{user.grad}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+
+                <form class="card" method="post">{% csrf_token %}
+                    <div class="card-body">
+                        <h3 class="card-title">Edit Profile</h3>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="mb-2">
+                                    <label class="form-label" for="id_email">Email address</label>
+                                    <input type="email" class="form-control" name="email" id="id_email" disabled="" placeholder={{account_form.initial.email}}>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-3">
+                                <div class="mb-2">
+                                    <label class="form-label" for="id_username">Username</label>
+                                    <input type="text" class="form-control" name="username" id="id_username" disabled="" placeholder={{account_form.initial.username}}>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6">
+                                <div class="mb-2">
+                                    <label class="form-label" for="id_first_name">First Name</label>
+                                    <input type="text" class="form-control" name="first_name" id="id_first_name" disabled="" placeholder={{account_form.initial.first_name}}>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6">
+                                <div class="mb-2">
+                                    <label class="form-label" for="id_last_name">Last Name</label>
+                                    <input type="text" class="form-control" name="last_name" id="id_last_name" disabled="" placeholder={{account_form.initial.last_name}}>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="col-sm-6 col-md-6">
+                                <div class="mb-2">
+                                    <label class="form-label" for="id_identity_number">Identity Card Number</label>
+                                    <input type="text" class="form-control" name="identity_number" id="id_identity_number" placeholder="Your Identity Card Number">
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6">
+                                <div class="mb-2">
+                                    <label class="form-label" for="identity_kind">Identity Card Type</label>
+                                    <select class="form-select" id="identity_kind" name="identity_kind">
+                                        <option value="Passport" selected>Passport</option>
+                                        <option value="National Identity Card">National Identity Card</option> 
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6">
+                                <div class="mb-2">
+                                    <label class="form-label" for="id_tel">Mobile Phone</label>
+                                    <input type="text" class="form-control" name="tel" id="id_tel" placeholder="Your phone number">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="mb-2">
+                                    <label class="form-label" for="id_address_home">Address</label>
+                                    <input type="text" class="form-control" name="address_home" id="id_address_home" placeholder="Home Address">
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-4">
+                                <div class="mb-2">
+                                    <label class="form-label" for="id_address_city">City</label>
+                                    <input type="text" class="form-control" name="address_city" id="id_address_city" placeholder="City">
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-3">
+                                <div class="mb-2">
+                                    <label class="form-label" for="id_address_postal_code">Postal Code</label>
+                                    <input type="number" class="form-control" name="address_postal_code" id="id_address_postal_code">
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="mb-2">
+                                    <label class="form-label" for="address_country">Country</label>
+                                    <select class="form-select" name="address_country" id="address_country">
+                                        <option value="">Morocco</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <hr>
+                            <!-- Professor section-->
+                            <!-- TODO put in a card-->
+                            {% if user.is_professor %}
+                            <div class="col-sm-6 col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label" for="profile">Profile</label>
+                                    <select class="form-select" id="profile" name="profile">
+                                        <option value="Vacataire" selected>Vacataire</option>
+                                        <option value="Affilié">Affilié</option>
+                                        <option value="Permanent Interne">Permanent Interne</option>
+                                        <option value="Permanent Interne">Permanent Externe</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6">
+                                <div class="mb-2">
+                                    <label class="form-label" for="grad">Grade</label>
+                                    <select class="form-select" id="grad" name="grad">
+                                        <option value="Assistant Professeur" selected>Assistant Professeur</option>
+                                        <option value="Associate Professeur">Associate Professeur</option>
+                                        <option value="Full Professeur">Full Professeur</option>
+                                        <option value="Post-doctorant">Post-doctorant</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6">
+                                <div class="mb-2">
+                                    <label class="form-label" for="id_university">University</label>
+                                    <input type="text" class="form-control" name="university" id="id_university" placeholder="Your university here">
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6">
+                                <div class="mb-2">
+                                    <label class="form-label" for="id_departement">Departement</label>
+                                    <input type="text" class="form-control" name="departement" id="id_departement" placeholder="Your departement here">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="mb-2">
+                                    <label class="form-label" for="id_expertize">Expertize</label>
+                                    <input type="text" class="form-control" name="expertize" id="id_expertize" placeholder="Your expertizes here">
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="card-footer text-right">
+                        <button type="submit" class="btn btn-primary">Update Profile</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% for field in account_form %}
+<p>
+    {% for error in field.errors %}
+    <p style="color: red">{{field.name}}: {{ error }}</p>
+    {% endfor %}
+</p>
+{% endfor %} {% if account_form.non_field_errors %}
+<div style="color: red">
+    <p>{{account_form.non_field_errors}}</p>
+</div>
+
+{% endif %} {% if success_message %}
+<p style="color:green; text-align: center;">{{success_message}}</p>
+{% endif %} {% endblock content %}

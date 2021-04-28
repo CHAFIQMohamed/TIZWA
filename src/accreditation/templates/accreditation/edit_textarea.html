@@ -1,0 +1,29 @@
+{% extends 'dashboard/base.html' %} {% block content %} {% include 'dashboard/snippets/menu_user.html' %} {% include 'dashboard/snippets/menu.html' %}
+
+<div class="content">
+    <div class="container">
+        <div class="row   align-items-center">
+            <div class="col-10">
+                <form class='card' method="post">{% csrf_token %}
+                    <div class="card-header">
+                        <h4 class="card-title">TODO</h4>
+                    </div>
+                    <div class="card-body">
+                        {{form.media}} {{form.as_p}}
+                    </div>
+                    <div class="modal-footer">
+                        {% if syllabus %}                        
+                        <a href="{% url 'accreditation:edit_syllabus' accreditation.name syllabus.name %}" class="btn btn-link link-secondary" data-dismiss="modal"> Cancel </a>
+                        {% else %}
+                        <a href="{% url 'accreditation:edit_accreditation' accreditation.name %}" class="btn btn-link link-secondary" data-dismiss="modal"> Cancel </a>
+                        {% endif %}                        
+                        <button type="submit" class="submit-button btn btn-primary ml-auto">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>  Update
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
